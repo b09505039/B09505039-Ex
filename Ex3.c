@@ -3,14 +3,16 @@
 #include <stdio.h>
 #include <time.h>
 
-struct content
+typedef struct 
 {
     int progress;
     char name[10];
     int lastscore;
     int thisscore;
     
-}Content[5];
+}content;
+
+content Content[5];
 
 char *names[10] = {"BLAKE","ODIN", "JADA", "KELVIN", "KALEB", "PIPER", "JAYSON", "JULIAN", "ANDI", "ABBY"};
 
@@ -70,27 +72,19 @@ void selectionSort(void *base, int n, size_t width, int (*compare)(const void *,
 	}
 }
 
-// void insertionSort(void *base, int n, size_t width, int (*compare)(const void *, const void *)){
-	
-//     int i, wall, j;
-//     for (i = 1; i < n; i++) {
-//         wall = (char*)(base + i*width);
-//         j = i - 1;
-//         while (j >= 0 && (char*)(base + j*width) > wall) {
-//             //arr[j + 1] = arr[j];
-//             SWAP((char*)(base + j*width), (char*)(base + (j-1)*width), width);
-//             j = j - 1;
-//         }
-//         (char*)(base + j*width) = wall;
-//     }
-// }
+void insertion_Sort(void *base, int n, size_t width, int (*compare)(const void *, const void *))
+{
+    for (int i = 0; i < n; i++)
+    {
+        int j = i;
+        while (j > 0 && (compare((char*)base+j*width,(char*)base+(j-1)*width))<0)
+        {
+            SWAP((char*)base + j*width, (char*)base + (j - 1)*width,width);
+            j--;
+        }
+    }
+}
 
-// void ranname(char *Name[])
-// {
-//     int j;
-//     j = rand()%10;
-//     Name[0] = names[j];
-// }
 
 swap(char *p, char *q)
 {
@@ -127,7 +121,7 @@ int main()
     //看要哪一種
     bubbleSort(Content, 5, sizeof(content), compare);
     selectionSort(Content, 5, sizeof(content), compare);
-    //insertionSort(Content, 5, sizeof(content), compare);
+    insertion_Sort(Content, 5, sizeof(content), compare);
 
     printf("progress    name    score   last score\n");
 
