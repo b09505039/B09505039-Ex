@@ -3,14 +3,16 @@
 #include <stdio.h>
 #include <time.h>
 
-struct content
+typedef struct 
 {
     int progress;
     char name[10];
     int lastscore;
     int thisscore;
     
-}Content[5];
+}content;
+
+content Content[5];
 
 char *names[10] = {"BLAKE","ODIN", "JADA", "KELVIN", "KALEB", "PIPER", "JAYSON", "JULIAN", "ANDI", "ABBY"};
 
